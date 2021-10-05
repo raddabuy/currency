@@ -18,4 +18,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('filter','App\Http\Controllers\CurrencyController@filterCurrency');
+Route::get('filter','App\Http\Controllers\API\CurrencyController@filterCurrency');
