@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CurrencyRequest;
 use App\Models\Currency;
+use App\Transformers\APIFractalManager;
+use App\Transformers\CurrencyTransformer;
 use Illuminate\Http\Request;
 
 class CurrencyController extends Controller
@@ -41,11 +44,21 @@ class CurrencyController extends Controller
      * )
      */
 
-    public function filterCurrency(Request $request){
-//        dd($request->from);
+    private $fractal;
+
+    public function __construct(
+        APIFractalManager $fractal
+    )
+    {
+        $this->fractal = $fractal;
+    }
+    public function filterCurrency(CurrencyRequest $request){
         $currencies = Currency::whereBetween('date', [$request->from,$request->to])
                                 ->where('valuteID',$request->valuteID)
                                 ->get();
-        return $currencies;
+
+        $resource = $this->fractal->collection($currencies, new CurrencyTransformer());
+
+        return $resource;
     }
 }
