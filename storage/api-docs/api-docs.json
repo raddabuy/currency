@@ -1,0 +1,52 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "LawApp",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost/currency/public/api",
+            "description": "Demo API Server"
+        }
+    ],
+    "paths": {
+        "/filter": {
+            "get": {
+                "tags": [
+                    "Currency"
+                ],
+                "summary": "Filter currencies by get parameters",
+                "operationId": "2279f2ae6bdea2fb4e68e8e534dac3b9",
+                "parameters": [
+                    {
+                        "name": "valuteID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "from",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
